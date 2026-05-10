@@ -1,27 +1,45 @@
-# Laboratório: Teste de Mutação com a "Calculadora Mutante"
+# Laboratório: Análise de Eficácia de Testes com StrykerJS
 
-Bem-vindo ao trabalho prático de Teste de Mutação. O objetivo deste projeto é usar a ferramenta StrykerJS para avaliar e fortalecer uma suíte de testes que, à primeira vista, parece boa.
+Este laboratório tem como objetivo exercitar o uso de ferramentas de teste de mutação para avaliar a eficácia de uma suíte de testes unitários, garantindo que a cobertura de código se traduza em segurança real contra falhas lógicas.
 
-## Contexto
+## 📌 Contexto do Projeto
+O projeto consiste em uma biblioteca JavaScript (`src/operacoes.js`) que contém diversas operações matemáticas e lógicas. Existe uma suíte de testes inicial em `test/operacoes.test.js` utilizando o framework **Jest**.
 
-Este repositório contém uma biblioteca de cálculos simples. A suíte de testes inicial em `__tests__/` foi projetada para ter uma alta **cobertura de código**, mas esconde fraquezas que só o **teste de mutação** pode revelar.
+## 🎯 Objetivos do Trabalho
+- Configurar e executar o framework de teste de mutação **StrykerJS**.
+- Analisar o relatório de mutação inicial e identificar mutantes sobreviventes.
+- Aprimorar a suíte de testes para mitigar mutantes e elevar significativamente o Mutation Score.
+- Elaborar um relatório técnico detalhando o processo de análise e melhoria.
 
-Sua missão é atuar como um engenheiro de qualidade para encontrar essas fraquezas e escrever testes mais robustos para corrigi-las.
+## 🛠 Metodologia de Execução
+Para atingir o objetivo proposto, o trabalho foi dividido em um pipeline iterativo de refatoração, com as etapas documentadas individualmente. O processo seguiu o ciclo: análise de mutantes sobreviventes -> diagnóstico de fragilidade do teste -> implementação de novos cenários -> validação de eficácia.
 
-## Tarefas
+As iterações focaram em:
+1. **Validações Estritas:** Substituição de asserções genéricas por verificações de mensagens de erro exatas e literais.
+2. **Análise de Valores Limite (BVA):** Inclusão de testes de fronteira para operadores relacionais (`>`, `<`, `>=`, `<=`).
+3. **Massa de Dados Dinâmica:** Uso de arrays desordenados e valores de borda para evitar o mascaramento de lógica em funções de ordenação e mediana.
 
-1.  **Prepare o ambiente:** Clone o repositório e rode `npm install`.
-2.  **Análise Inicial:**
-    - Rode `npm test` para ver os testes passando.
-    - Rode `npm run coverage` e anote o percentual de cobertura.
-3.  **Análise de Mutação:**
-    - Configure o StrykerJS (`npx stryker init`).
-    - Execute a análise com `npx stryker run` (ou `npm run mutate` após configurar o script).
-    - Abra o relatório HTML e analise os **mutantes que sobreviveram**.
-4.  **Aprimore os Testes:**
-    - Para cada mutante sobrevivente, entenda por que ele não foi "morto".
-    - Adicione novos testes em `__tests__/operacoes.test.js` focados em asserções mais específicas para matar esses mutantes.
-5.  **Validação Final:**
-    - Rode o Stryker novamente e verifique se sua pontuação de mutação aumentou, idealmente para mais de 95%.
+## 📊 Resultados Obtidos
+Abaixo, a comparação consolidada extraída do relatório técnico da disciplina:
 
-Siga as instruções do documento do trabalho para a entrega final. Boa sorte!
+| Métrica | Estado Inicial | Resultado Final |
+| :--- | :--- | :--- |
+| **Cobertura de Código (Jest)** | 98.44% | Mantida / Elevada |
+| **Mutantes Gerados** | 213 | 213 |
+| **Mutantes Sobreviventes** | 44 | 4 |
+| **Mutation Score (Stryker)** | **73.71%** | **98.13%** |
+
+## 📂 Organização dos Artefatos
+- `src/operacoes.js`: Biblioteca com 50 operações matemáticas.
+- `test/operacoes.test.js`: Suíte de testes unitários refatorada e blindada.
+- `historico_mutantes_iteracao_*.md`: Logs detalhados de cada rodada de refatoração.
+- `reports/`: Relatório visual HTML comprovando a mitigação dos mutantes.
+
+## 🚀 Como Executar
+1. Instale as dependências: `npm install`
+2. Execute os testes com cobertura: `npm test --coverage`
+3. Execute o teste de mutação: `npx stryker run`
+
+---
+**Autor:** João Pedro Aguiar  
+**Disciplina:** Testes de Software - PUC Minas
