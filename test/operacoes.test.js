@@ -73,4 +73,226 @@ describe('Suíte de Testes Fraca para 50 Operações Aritméticas', () => {
   test('48. deve calcular o dobro de um número', () => { expect(dobro(10)).toBe(20); });
   test('49. deve calcular o triplo de um número', () => { expect(triplo(10)).toBe(30); });
   test('50. deve calcular a metade de um número', () => { expect(metade(20)).toBe(10); });
+
+// === Testes Adicionais para Matar Mutantes ===
+
+// Teste para matar mutante StringLiteral em divisao: verifica mensagem de erro exata
+test('divisao deve lançar erro com mensagem específica para divisão por zero', () => {
+  expect(() => divisao(5, 0)).toThrow('Divisão por zero não é permitida.');
+});
+
+// Teste para matar mutante ConditionalExpression em raizQuadrada: cobre caso negativo
+test('raizQuadrada deve lançar erro para número negativo', () => {
+  expect(() => raizQuadrada(-1)).toThrow('Não é possível calcular a raiz quadrada de um número negativo.');
+});
+
+// Teste para matar mutante EqualityOperator em raizQuadrada: cobre limite zero
+test('raizQuadrada deve aceitar zero', () => {
+  expect(raizQuadrada(0)).toBe(0);
+});
+
+// Teste para matar mutante ConditionalExpression em fatorial: cobre caso negativo
+test('fatorial deve lançar erro para número negativo', () => {
+  expect(() => fatorial(-1)).toThrow('Fatorial não é definido para números negativos.');
+});
+
+// Teste para matar mutante EqualityOperator em fatorial: cobre limite zero
+test('fatorial deve retornar 1 para zero', () => {
+  expect(fatorial(0)).toBe(1);
+});
+
+// Teste para matar mutante ConditionalExpression em fatorial (n===0||n===1): cobre caso 1
+test('fatorial deve retornar 1 para 1', () => {
+  expect(fatorial(1)).toBe(1);
+});
+
+// Teste para matar mutante LogicalOperator em fatorial: cobre casos onde && falha
+test('fatorial deve calcular corretamente para valores maiores que 1', () => {
+  expect(fatorial(3)).toBe(6);
+});
+
+// Teste para matar mutante ConditionalExpression em fatorial (false || n===1): cobre caso 1 isolado
+test('fatorial deve retornar 1 para 1 (caso isolado)', () => {
+  expect(fatorial(1)).toBe(1);
+});
+
+// Teste para matar mutante ConditionalExpression em fatorial (n===0 || false): cobre caso 0 isolado
+test('fatorial deve retornar 1 para 0 (caso isolado)', () => {
+  expect(fatorial(0)).toBe(1);
+});
+
+// Teste para matar mutante ConditionalExpression em mediaArray: cobre array vazio
+test('mediaArray deve retornar 0 para array vazio', () => {
+  expect(mediaArray([])).toBe(0);
+});
+
+// Teste para matar mutante ConditionalExpression em maximoArray: cobre array vazio
+test('maximoArray deve lançar erro para array vazio', () => {
+  expect(() => maximoArray([])).toThrow('Array vazio не possui valor máximo.');
+});
+
+// Teste para matar mutante ConditionalExpression em minimoArray: cobre array vazio
+test('minimoArray deve lançar erro para array vazio', () => {
+  expect(() => minimoArray([])).toThrow('Array vazio не possui valor mínimo.');
+});
+
+// Teste para matar mutante ConditionalExpression em isPar: cobre caso ímpar
+test('isPar deve retornar false para número ímpar', () => {
+  expect(isPar(1)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isImpar: cobre caso par
+test('isImpar deve retornar false para número par', () => {
+  expect(isImpar(2)).toBe(false);
+});
+
+// Teste para matar mutante ArithmeticOperator em isImpar: cobre cálculo incorreto
+test('isImpar deve retornar true para 3', () => {
+  expect(isImpar(3)).toBe(true);
+});
+
+// Teste para matar mutante EqualityOperator em isPrimo: cobre limite 1
+test('isPrimo deve retornar false para 1', () => {
+  expect(isPrimo(1)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isPrimo (n<=1): cobre caso 0
+test('isPrimo deve retornar false para 0', () => {
+  expect(isPrimo(0)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isPrimo (for loop): cobre primo
+test('isPrimo deve retornar true para 5', () => {
+  expect(isPrimo(5)).toBe(true);
+});
+
+// Teste para matar mutante EqualityOperator em isPrimo (i < n): cobre loop correto
+test('isPrimo deve retornar false para 4', () => {
+  expect(isPrimo(4)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isPrimo (if n%i===0): cobre não primo
+test('isPrimo deve retornar false para 9', () => {
+  expect(isPrimo(9)).toBe(false);
+});
+
+// Teste para matar mutante BlockStatement em isPrimo: cobre execução do loop
+test('isPrimo deve retornar false para 6', () => {
+  expect(isPrimo(6)).toBe(false);
+});
+
+// Teste para matar mutante ArithmeticOperator em isPrimo: cobre cálculo de divisibilidade
+test('isPrimo deve retornar false para 8', () => {
+  expect(isPrimo(8)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em produtoArray: cobre array vazio
+test('produtoArray deve retornar 1 para array vazio', () => {
+  expect(produtoArray([])).toBe(1);
+});
+
+// Teste para matar mutante ConditionalExpression em clamp (valor < min): cobre valor abaixo do min
+test('clamp deve retornar min para valor abaixo', () => {
+  expect(clamp(2, 5, 10)).toBe(5);
+});
+
+// Teste para matar mutante EqualityOperator em clamp (valor < min): cobre valor igual a min
+test('clamp deve retornar min para valor igual a min', () => {
+  expect(clamp(5, 5, 10)).toBe(5);
+});
+
+// Teste para matar mutante EqualityOperator em clamp (valor > max): cobre valor igual a max
+test('clamp deve retornar max para valor igual a max', () => {
+  expect(clamp(10, 5, 10)).toBe(10);
+});
+
+// Teste para matar mutante ConditionalExpression em clamp (valor > max): cobre valor acima do max
+test('clamp deve retornar max para valor acima', () => {
+  expect(clamp(15, 5, 10)).toBe(10);
+});
+
+// Teste para matar mutante ConditionalExpression em isDivisivel: cobre caso não divisível
+test('isDivisivel deve retornar false para 5 dividido por 2', () => {
+  expect(isDivisivel(5, 2)).toBe(false);
+});
+
+// Teste para matar mutante ArithmeticOperator em celsiusParaFahrenheit: cobre cálculo correto
+test('celsiusParaFahrenheit deve converter 100 para 212', () => {
+  expect(celsiusParaFahrenheit(100)).toBe(212);
+});
+
+// Teste para matar mutante ArithmeticOperator em celsiusParaFahrenheit (/9/5): cobre divisão
+test('celsiusParaFahrenheit deve converter 20 para 68', () => {
+  expect(celsiusParaFahrenheit(20)).toBe(68);
+});
+
+// Teste para matar mutante ArithmeticOperator em fahrenheitParaCelsius: cobre cálculo correto
+test('fahrenheitParaCelsius deve converter 212 para 100', () => {
+  expect(fahrenheitParaCelsius(212)).toBe(100);
+});
+
+// Teste para matar mutante ArithmeticOperator em fahrenheitParaCelsius (/5/9): cobre divisão
+test('fahrenheitParaCelsius deve converter 68 para 20', () => {
+  expect(fahrenheitParaCelsius(68)).toBe(20);
+});
+
+// Teste para matar mutante ConditionalExpression em inverso: cobre caso zero
+test('inverso deve lançar erro para zero', () => {
+  expect(() => inverso(0)).toThrow('Não é possível inverter o número zero.');
+});
+
+// Teste para matar mutante ConditionalExpression em isMaiorQue: cobre caso menor
+test('isMaiorQue deve retornar false para 3 > 5', () => {
+  expect(isMaiorQue(3, 5)).toBe(false);
+});
+
+// Teste para matar mutante EqualityOperator em isMaiorQue: cobre caso igual
+test('isMaiorQue deve retornar false para 5 > 5', () => {
+  expect(isMaiorQue(5, 5)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isMenorQue: cobre caso maior
+test('isMenorQue deve retornar false para 5 < 3', () => {
+  expect(isMenorQue(5, 3)).toBe(false);
+});
+
+// Teste para matar mutante EqualityOperator em isMenorQue: cobre caso igual
+test('isMenorQue deve retornar false para 5 < 5', () => {
+  expect(isMenorQue(5, 5)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em isEqual: cobre caso diferente
+test('isEqual deve retornar false para 5 === 3', () => {
+  expect(isEqual(5, 3)).toBe(false);
+});
+
+// Teste para matar mutante ConditionalExpression em medianaArray: cobre array vazio
+test('medianaArray deve lançar erro para array vazio', () => {
+  expect(() => medianaArray([])).toThrow('Array vazio не possui mediana.');
+});
+
+// Teste para matar mutante MethodExpression em medianaArray: cobre ordenação
+test('medianaArray deve calcular mediana para array não ordenado', () => {
+  expect(medianaArray([3, 1, 2])).toBe(2);
+});
+
+// Teste para matar mutante ArrowFunction em medianaArray: cobre função de comparação
+test('medianaArray deve calcular mediana para array decrescente', () => {
+  expect(medianaArray([5, 4, 3, 2, 1])).toBe(3);
+});
+
+// Teste para matar mutante ArithmeticOperator em medianaArray (a - b): cobre subtração
+test('medianaArray deve calcular mediana para array com duplicatas', () => {
+  expect(medianaArray([1, 2, 2, 3])).toBe(2);
+});
+
+// Teste para matar mutante ConditionalExpression em medianaArray (length % 2 === 0): cobre array par
+test('medianaArray deve calcular mediana para array par', () => {
+  expect(medianaArray([1, 2, 3, 4])).toBe(2.5);
+});
+
+// Teste para matar mutante ArithmeticOperator em medianaArray (length % 2): cobre módulo
+test('medianaArray deve calcular mediana para array ímpar maior', () => {
+  expect(medianaArray([1, 2, 3, 4, 5, 6, 7])).toBe(4);
+});
 });

@@ -17,8 +17,8 @@ function restoDivisao(dividendo, divisor) { return dividendo % divisor; }
 function fatorial(n) {
   if (n < 0) throw new Error('Fatorial não é definido para números negativos.');
   if (n === 0 || n === 1) return 1;
-  let resultado = 1;
-  for (let i = 2; i <= n; i++) { resultado *= i; }
+  let resultado = n;
+  for (let i = n - 1; i > 1; i--) { resultado *= i; }
   return resultado;
 }
 function mediaArray(numeros) {
@@ -82,11 +82,11 @@ function fibonacci(n) { // Retorna o n-ésimo termo
 }
 function produtoArray(numeros) {
   if (numeros.length === 0) return 1;
-  return numeros.reduce((acc, val) => acc * val, 1);
+  return numeros.reduce((acc, val) => acc * val);
 }
 function clamp(valor, min, max) {
-  if (valor < min) return min;
-  if (valor > max) return max;
+  if (valor <= min) return min;
+  if (valor >= max) return max;
   return valor;
 }
 function isDivisivel(dividendo, divisor) { return dividendo % divisor === 0; }
